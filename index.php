@@ -10,7 +10,12 @@
 <body>
 
     <?php
-    echo "Hello World!";
+
+    $greeting = "Hello";
+    // echo "$greeting World!";
+    // echo $greeting . " " . "World!";
+    echo '$greeting World!';
+
     ?>
 
 
