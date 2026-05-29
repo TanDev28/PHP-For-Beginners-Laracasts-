@@ -13,37 +13,65 @@
     <h1>Các cuốn sách văn học</h1>
 
     <?php
-    // $books = [
-    //     "Số đỏ",
-    //     "Nỗi buồn chiến tranh",
-    //     "Tuổi thơ dữ dội"
-    // ];
-    // echo $books[2]; //Truy cập mảng chỉ số
 
     $books = [
         [
             'name' => 'Số đỏ',
             'author' => 'Vũ Trọng Phụng',
+            'releaseYear' => 1936,
             'purchaseUrl' => 'https://vnexpress.net/'
         ],
         [
             'name' => 'Nỗi buồn chiến tranh',
             'author' => 'Bảo Ninh',
+            'releaseYear' => 1990,
+            'purchaseUrl' => 'https://vnexpress.net/'
+        ],
+        [
+            'name' => 'Tuổi thơ dữ dội',
+            'author' => 'Phùng Quán',
+            'releaseYear' => 1988,
             'purchaseUrl' => 'https://vnexpress.net/'
         ]
     ];
+
+    function filterByAuthor($books, $author)
+    {
+        $filteredBooks = [];
+
+        foreach ($books as $book) {
+            if ($book['author'] === $author) {
+                $filteredBooks[] = $book;
+            }
+        }
+
+        return $filteredBooks;
+    }
+
     ?>
 
-    <ul>
+    <!-- Phải phân biệt phép gán = và phép so sánh === -->
+    <!-- <ul>
         <?php foreach ($books as $book) : ?>
+        <?php if ($book['author'] === 'Phùng Quán') : ?>
         <a href="<?= $book['purchaseUrl'] ?>">
             <li>
-                <?= $book['name'] ?>
+                <?= $book['name'] ?> - By (<?= $book['author'] ?>)
+            </li>
+        </a>
+        <?php endif; ?>
+        <?php endforeach; ?>
+    </ul> -->
+
+    <ul>
+        <?php foreach (filterByAuthor($books, 'Bảo Ninh') as $book) : ?>
+        <a href="<?= $book['purchaseUrl'] ?>">
+            <li>
+                <?= $book['name'] ?> (<?= $book['releaseYear'] ?>) - By <?= $book['author'] ?>
             </li>
         </a>
         <?php endforeach; ?>
     </ul>
-
 
 </body>
 
