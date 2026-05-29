@@ -5,36 +5,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <style>
-    body {
-        display: grid;
-        place-items: center;
-        height: 100vh;
-        margin: 0;
-        font-family: sans-serif;
-    }
-    </style>
+
 </head>
 
 <body>
 
+    <h1>Các cuốn sách văn học</h1>
+
     <?php
-
-    $name = "Lập trình PHP";
-    $read = true;
-    if ($read) {
-        $message = "Tôi đã đọc cuốn $name";
-    } else {
-        $message = "Tôi CHƯA đọc cuốn $name";
-    }
-
+    $books = [
+        "Số đỏ",
+        "Nỗi buồn chiến tranh",
+        "Tuổi thơ dữ dội"
+    ];
     ?>
 
-    <h1>
-        <!-- Không cần dấu chấm phẩy -->
-        <?= $message ?>
-    </h1>
+    <h2>Cách 1</h2>
+    <!-- Cách 1 -->
+    <ul>
+        <?php
+        foreach ($books as $book) {
+            echo "<li>$book</li>";
+            // echo "<li>{$book}TM</li>"; //Dùng `{}` để cô lập biến khi nối thêm text.
+        }
+        ?>
+    </ul>
 
+    <h2>Cách 2</h2>
+    <!-- Cách 2 -->
+    <ul>
+        <?php foreach ($books as $book) : ?>
+        <li><?= $book ?></li>
+        <?php endforeach; ?>
+    </ul>
 
 </body>
 
