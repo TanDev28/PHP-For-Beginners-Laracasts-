@@ -13,7 +13,6 @@
     <h1>Các cuốn sách văn học</h1>
 
     <?php
-
     $books = [
         [
             'name' => 'Số đỏ',
@@ -35,8 +34,7 @@
         ]
     ];
 
-    function filterByAuthor($books, $author)
-    {
+    $filterByAuthor = function ($books, $author) {
         $filteredBooks = [];
 
         foreach ($books as $book) {
@@ -46,25 +44,13 @@
         }
 
         return $filteredBooks;
-    }
+    };
 
+    $filteredBooks = $filterByAuthor($books, "Bảo Ninh");
     ?>
 
-    <!-- Phải phân biệt phép gán = và phép so sánh === -->
-    <!-- <ul>
-        <?php foreach ($books as $book) : ?>
-        <?php if ($book['author'] === 'Phùng Quán') : ?>
-        <a href="<?= $book['purchaseUrl'] ?>">
-            <li>
-                <?= $book['name'] ?> - By (<?= $book['author'] ?>)
-            </li>
-        </a>
-        <?php endif; ?>
-        <?php endforeach; ?>
-    </ul> -->
-
     <ul>
-        <?php foreach (filterByAuthor($books, 'Bảo Ninh') as $book) : ?>
+        <?php foreach ($filteredBooks as $book) : ?>
         <a href="<?= $book['purchaseUrl'] ?>">
             <li>
                 <?= $book['name'] ?> (<?= $book['releaseYear'] ?>) - By <?= $book['author'] ?>
