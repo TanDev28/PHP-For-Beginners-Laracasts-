@@ -14,4 +14,6 @@ $statement->execute();
 // $posts = $statement->fetchAll(); // Bị trùng lặp
 $posts = $statement->fetchAll(PDO::FETCH_ASSOC); // Xử lý trùng lặp
 
-dd($posts);
+foreach ($posts as $post) {
+    echo "<li>" . $post['title'] . "</li>";
+}
