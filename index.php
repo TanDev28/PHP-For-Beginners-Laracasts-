@@ -3,23 +3,15 @@
 require "functions.php";
 // require "router.php";
 
-class Person
-{
-    public $name;
-    public $age;
+// connect to our MySQL database
+$dsn = "mysql:host=localhost;port=3306;dbname=myapp;user=root;charset=utf8mb4";
 
-    public function breathe()
-    {
-        echo "$this->name is breathing";
-    }
-}
+$pdo = new PDO($dsn);
 
-$person = new Person();
-$person->name = "Tân";
-$person->age = 25;
+$statement = $pdo->prepare("select * FROM posts");
+$statement->execute();
 
-// dd($person);
-// dd($person->name);
-// dd($person->age);
-// dd($person->breathe());
-$person->breathe();
+// $posts = $statement->fetchAll(); // Bị trùng lặp
+$posts = $statement->fetchAll(PDO::FETCH_ASSOC); // Xử lý trùng lặp
+
+dd($posts);
