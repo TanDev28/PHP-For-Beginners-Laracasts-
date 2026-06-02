@@ -5,14 +5,9 @@ require "functions.php";
 
 require "Database.php";
 
-$config = [
-    "host" => "localhost",
-    "port" => 3306,
-    "dbname" => "myapp",
-    "charset" => "utf8mb4"
-];
+$config = require "config.php";
 
-$db = new Database($config);
+$db = new Database($config["database"]);
 
 $posts = $db->query("select * FROM posts")->fetchAll();
 
