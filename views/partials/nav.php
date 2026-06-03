@@ -13,6 +13,8 @@
                             class="rounded-md px-3 py-2 text-sm font-medium <?= urlIs('/') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' ?>">Home</a>
                         <a href="/about"
                             class="rounded-md px-3 py-2 text-sm font-medium <?= urlIs('/about') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' ?>">About</a>
+                        <a href="/notes"
+                            class="rounded-md px-3 py-2 text-sm font-medium <?= urlIs('/notes') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' ?>">Notes</a>
                         <a href="/contact"
                             class="rounded-md px-3 py-2 text-sm font-medium <?= urlIs('/contact') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-white/5 hover:text-white' ?>">Contact</a>
 

@@ -1,17 +1,12 @@
 <?php
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 
-// if ($uri === "/") {
-//     require "controllers/index.php";
-// } else if ($uri === "/contact") {
-//     require "controllers/contact.php";
-// } else if ($uri === "/about") {
-//     require "controllers/about.php";
-// }
 
 $routes = [
     "/" => "controllers/index.php",
     "/contact" => "controllers/contact.php",
+    "/notes" => "controllers/notes.php",
+    "/note" => "controllers/note.php",
     "/about" => "controllers/about.php"
 ];
 
