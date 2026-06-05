@@ -13,7 +13,16 @@
                             <label for="body" class="block text-sm/6 font-medium text-gray-900">Body</label>
                             <div class="mt-2">
                                 <textarea id="body" name="body" rows="3"
-                                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"></textarea>
+                                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                                    <?= $_POST['body'] ?? '' ?></textarea>
+                                <!-- $_POST['body'] ?? '' cú pháp của PHP 8 tương ứng với isset($_POST['body']) ? $_POST['body'] : '' 
+                                    dùng để ngăn dữ liệu trong form bị xóa khi thêm không thành công
+                                    -->
+                                <!-- Kiểm tra xem phần tử có key "body" trong mảng $errors có tồn tại và không phải null hay không.
+                                    Nếu tồn tại thì điều kiện đúng (true) và khối lệnh bên trong if sẽ được thực thi. -->
+                                <?php if (isset($errors['body'])) : ?>
+                                <p class="text-red-500 text-xs mt-2"><?= $errors['body'] ?></p>
+                                <?php endif; ?>
                             </div>
 
                         </div>

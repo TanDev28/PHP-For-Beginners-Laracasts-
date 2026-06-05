@@ -5,11 +5,23 @@ $db = new Database($config["database"]);
 
 $heading = "Create Notes";
 
-if ($_SERVER['REQUEST_METHOD'] === "POST") {
-    $db->query("INSERT INTO notes(body, user_id) VALUES(:body, :user_id)", [
-        "body" => $_POST["body"],
-        "user_id" => 1
-    ]);
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+
+    $errors = [];
+    if (strlen($_POST['body']) == 0) {
+        $errors['body'] = "A body is required.";
+    }
+
+    if (strlen($_POST['body']) > 50) {
+        $errors['body'] = "A body can not more than 50 characters.";
+    }
+
+    if (empty($errors)) {
+        $db->query("INSERT INTO notes(body, user_id) VALUES(:body, :user_id)", [
+            "body" => $_POST["body"],
+            "user_id" => 1
+        ]);
+    }
 }
 
 
