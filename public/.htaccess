@@ -1,0 +1,10 @@
+Options -MultiViews -Indexes
+
+RewriteEngine On
+
+# Nếu đường dẫn là một file hoặc thư mục có thật thì truy cập thẳng
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# Nếu không phải, tự động chuyển toàn bộ request về public/index.php
+RewriteRule ^ index.php [L]

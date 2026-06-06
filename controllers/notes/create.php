@@ -1,17 +1,16 @@
 <?php
 
-require "Validator.php";
+// require "Validator.php";
 
-$config = require "config.php";
+$config = require base_path("config.php");
 $db = new Database($config["database"]);
 
 // dd(Validator::email('tan@gmail.com')); // Trả về false nếu sai, ngược lại trả về chính định dạng email đúng tan@gmail.com
 
-$heading = "Create Notes";
-
+$errors = [];
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-    $errors = [];
+
     if (! Validator::string($_POST['body'], 1, 50)) {
         $errors['body'] = "The body of no more than 50 characters is required.";
     }
@@ -24,5 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     }
 }
 
-
-require "views/notes/create.view.php";
+view("notes/create.view.php", [
+    'heading' => 'Create Notes',
+    'errors' => $errors
+]);
