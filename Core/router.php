@@ -4,6 +4,7 @@ namespace Core;
 
 use Core\Middleware\Guest;
 use Core\Middleware\Auth;
+use Core\Middleware\Middleware;
 
 class Router
 {
@@ -73,15 +74,14 @@ class Router
         foreach ($this->routes as $route) {
             if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
                 // apply middleware
-                if ($route['middleware'] === 'guest') {
-                    (new Guest)->handle();
-                }
+                // Cách 1
+                // if ($route['middleware']) {
+                //     $middleware = Middleware::MAP[$route['middleware']];
+                //     (new $middleware)->handle();
+                // }
 
-                if ($route['middleware'] === 'auth') {
-                    (new Auth)->handle();
-                }
-
-                // Tuy nhiên code trên sẽ bị lặp lại ở nhiều nơi, vì thế phải sử dụng middleware để tránh lặp code
+                // Cách 2
+                Middleware::resolve($route['middleware']);
 
 
                 return require base_path($route['controller']);
