@@ -2,6 +2,9 @@
 
 namespace Core;
 
+use Core\Middleware\Guest;
+use Core\Middleware\Auth;
+
 class Router
 {
 
@@ -71,18 +74,15 @@ class Router
             if ($route['uri'] === $uri && $route['method'] === strtoupper($method)) {
                 // apply middleware
                 if ($route['middleware'] === 'guest') {
-                    if ($_SESSION['user'] ?? false) {
-                        header('location: /');
-                        exit();
-                    }
+                    (new Guest)->handle();
                 }
 
                 if ($route['middleware'] === 'auth') {
-                    if (! $_SESSION['user'] ?? false) {
-                        header('location: /');
-                        exit();
-                    }
+                    (new Auth)->handle();
                 }
+
+                // Tuy nhiên code trên sẽ bị lặp lại ở nhiều nơi, vì thế phải sử dụng middleware để tránh lặp code
+
 
                 return require base_path($route['controller']);
             }
