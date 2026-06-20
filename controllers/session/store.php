@@ -30,21 +30,15 @@ $user = $db->query('select * from users where email = :email', [
 ])->find();
 
 // Nhược điểm code quá dài
-if (! $user) {
-    return view('/session/create.view.php', [
-        'errors' => [
-            'email' => 'No matching account found for that email address'
-        ]
-    ]);
-}
+if ($user) {
+    if (password_verify($password, $user['password'])) {
+        login([
+            'email' => $email
+        ]);
 
-if (password_verify($password, $user['password'])) {
-    login([
-        'email' => $email
-    ]);
-
-    header('location: /');
-    exit();
+        header('location: /');
+        exit();
+    }
 }
 
 return view('/session/create.view.php', [
