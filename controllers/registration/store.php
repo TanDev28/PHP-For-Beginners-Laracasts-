@@ -46,10 +46,11 @@ if ($user) {
     ]);
 
     // mark that the users has logged in
-    $_SESSION['logged_in'] = true;
-    $_SESSION['user'] = [
+    // $_SESSION['logged_in'] = true;
+
+    login([
         'email' => $email
-    ];
+    ]);
 
     header('location: /');
     exit();

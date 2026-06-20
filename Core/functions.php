@@ -44,3 +44,9 @@ function view($path, $attributes = [])
 
     require base_path("views/" . $path); // Khi thay return bằng require sẽ gặp tình trạng về phạm vi của biến, nên phải có tham số là mảng chứa biến
 }
+
+function login($user) {
+    $_SESSION['user'] = [
+        'email' => $user['email']
+    ];
+}
