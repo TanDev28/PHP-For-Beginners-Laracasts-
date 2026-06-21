@@ -1,8 +1,6 @@
 <?php
 
-use Core\App;
-use Core\Database;
-use Core\Validator;
+use Core\Authenticator;
 use Http\Forms\LoginForm;
 
 $email = $_POST['email'];
@@ -16,21 +14,9 @@ if (! $form->validate($email, $password)) {
 }
 
 //match the credentials
-$db = App::resolve(Database::class);
-$user = $db->query('select * from users where email = :email', [
-    'email' => $email
-])->find();
-
-// Nhược điểm code quá dài
-if ($user) {
-    if (password_verify($password, $user['password'])) {
-        login([
-            'email' => $email
-        ]);
-
-        header('location: /');
-        exit();
-    }
+$auth = new Authenticator;
+if ($auth->attempt($email, $password)) {
+    redirect('/');
 }
 
 return view('/session/create.view.php', [
