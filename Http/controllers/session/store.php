@@ -17,5 +17,8 @@ if ($form->validate($email, $password)) {
 }
 // $_SESSION['_flash']['errors'] = $form->errors(); // Tối ưu bằng class Session bên dưới
 Session::flash('errors', $form->errors());
+Session::flash('old', [
+    'email' => $_POST['email']
+]);
 
 redirect('/login');
