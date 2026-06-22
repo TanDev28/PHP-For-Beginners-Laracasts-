@@ -14,6 +14,13 @@ if ($form->validate($email, $password)) {
 
     $form->error('email', 'No matching account found for that email address and password');
 }
-return view('/session/create.view.php', [
-    'errors' => $form->errors()
-]);
+
+
+// Cách này sửa được nhưng "dòng lỗi thông báo khi nhập sai form" vẫn còn dù load trang
+$_SESSION['errors'] = $form->errors();
+redirect('/login');
+
+// //Gặp lỗi load lại trang và back trang khi nhập sai
+// return view('/session/create.view.php', [
+//     'errors' => $form->errors()
+// ]);
