@@ -1,5 +1,8 @@
 <?php
 
+use Core\ValidationException;
+use Core\Session;
+
 session_start();
 
 const BASE_PATH = __DIR__ . "/../"; // Lấy đường dẫn thư mục gốc (hiện tại là public) xong lùi ra một thư mục
@@ -20,7 +23,14 @@ $routes = require base_path("routes.php");
 $uri = parse_url($_SERVER['REQUEST_URI'])['path'];
 $method = isset($_POST['_method']) ? $_POST['_method'] : $_SERVER['REQUEST_METHOD']; // shorthand: $_POST['_method'] ?? $_SERVER['REQUEST_METHOD'];
 
-$router->route($uri, $method);
+try {
+    $router->route($uri, $method);
+} catch (ValidationException $exception) {
+    Session::flash('errors', $exception->errors);
+    Session::flash('old', $exception->old);
 
-// unset($_SESSION['_flash']); // Tối ưu bằng class Session
+    // redirect('/login'); // Không thể gán cứng login vì đây đang dùng chung
+    redirect($router->previousUrl());
+}
+
 \Core\Session::unflash();
