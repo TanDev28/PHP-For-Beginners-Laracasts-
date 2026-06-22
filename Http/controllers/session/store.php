@@ -2,23 +2,28 @@
 
 use Core\Session;
 use Core\Authenticator;
+use Core\ValidationException;
 use Http\Forms\LoginForm;
 
-$email = $_POST['email'];
-$password = $_POST['password'];
+try {
 
-$form = new LoginForm;
-if ($form->validate($email, $password)) {
-    if ((new Authenticator)->attempt($email, $password)) {
-        redirect('/');
-    }
+    $form = LoginForm::validate($attributes = [
+        'email' => $_POST['email'],
+        'password' => $_POST['password']
+    ]);
+} catch (ValidationException $exception) {
 
-    $form->error('email', 'No matching account found for that email address and password');
+    Session::flash('errors', $exception->errors);
+    Session::flash('old', $exception->old);
+
+    redirect('/login');
 }
-// $_SESSION['_flash']['errors'] = $form->errors(); // Tối ưu bằng class Session bên dưới
-Session::flash('errors', $form->errors());
-Session::flash('old', [
-    'email' => $_POST['email']
-]);
 
+
+if ((new Authenticator)->attempt($attributes['email'], $attributes['password'])) {
+    redirect('/');
+}
+$form->error('email', 'No matching account found for that email address and password');
+// Session::flash('errors', $form->errors());
+// Session::flash('old', $attributes);
 redirect('/login');
