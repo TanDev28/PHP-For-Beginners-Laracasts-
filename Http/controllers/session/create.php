@@ -1,5 +1,7 @@
 <?php
 
+use Core\Session;
+
 view('session/create.view.php', [
-    'errors' => $_SESSION['errors'] ?? []
+    'errors' => Session::get('errors') // Không lấy được vì làm gì có key = errors nào, phải cập nhật tiếp phương thức get của Session
 ]);
