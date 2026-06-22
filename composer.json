@@ -1,0 +1,16 @@
+{
+  "name": "duytan/demo",
+  "authors": [
+    {
+      "name": "TanDev28",
+      "email": "tan01101it@gmail.com"
+    }
+  ],
+  "require": {},
+  "autoload": {
+    "psr-4": {
+      "Core\\": "Core",
+      "Http\\": "Http"
+    }
+  }
+}
