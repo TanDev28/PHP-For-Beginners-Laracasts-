@@ -6,7 +6,9 @@
       "email": "tan01101it@gmail.com"
     }
   ],
-  "require": {},
+  "require": {
+    "illuminate/collections": "^13.16"
+  },
   "autoload": {
     "psr-4": {
       "Core\\": "Core",

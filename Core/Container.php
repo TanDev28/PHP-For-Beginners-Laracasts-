@@ -13,7 +13,8 @@ class Container
     }
     // Lúc này mảng $bindings có dạng:
     // [
-    // 'Core\Database' => function () {
+    // 'Core\Database' => function () 
+    // {
     // $config = require base_path("config.php");
     // return new Database($config["database"]);
     // }
